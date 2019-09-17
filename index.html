@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!-- STEP 1 - Use tachyons CSS framework -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"
+    />
+  </head>
+  <body>
+    <!-- Add a button "Add User" -->
+    <a
+      id="addUser"
+      class="f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-black"
+      href="#0"
+      >Add User</a
+    >
+    <audio id="accomplished" src="./accomplished.mp3"></audio>
+    <audio id="declined" src="./hold-on.mp3"></audio>
+
+    <main class="mw6 center"></main>
+    <!-- STEP 5 - Add success and error sound effects and play them when appropriate -->
+    <script>
+      const btn = document.querySelector("#addUser");
+
+      const audioAdded = document.querySelector("#accomplished");
+      const audioDeclined = document.querySelector("#declined");
+
+      let people = [];
+
+      // STEP 2 - insert 3 Github users in morePeople array
+      let morePeople = [
+        {
+          login: "katieatgeorgian",
+          id: 47111708,
+          node_id: "MDQ6VXNlcjQ3MTExNzA4",
+          avatar_url: "https://avatars0.githubusercontent.com/u/47111708?v=4",
+          gravatar_id: "",
+          url: "https://api.github.com/users/katieatgeorgian",
+          html_url: "https://github.com/katieatgeorgian",
+          followers_url:
+            "https://api.github.com/users/katieatgeorgian/followers",
+          following_url:
+            "https://api.github.com/users/katieatgeorgian/following{/other_user}",
+          gists_url:
+            "https://api.github.com/users/katieatgeorgian/gists{/gist_id}",
+          starred_url:
+            "https://api.github.com/users/katieatgeorgian/starred{/owner}{/repo}",
+          subscriptions_url:
+            "https://api.github.com/users/katieatgeorgian/subscriptions",
+          organizations_url:
+            "https://api.github.com/users/katieatgeorgian/orgs",
+          repos_url: "https://api.github.com/users/katieatgeorgian/repos",
+          events_url:
+            "https://api.github.com/users/katieatgeorgian/events{/privacy}",
+          received_events_url:
+            "https://api.github.com/users/katieatgeorgian/received_events",
+          type: "User",
+          site_admin: false,
+          name: "Katie",
+          company: null,
+          blog: "",
+          location: null,
+          email: null,
+          hireable: null,
+          bio: null,
+          public_repos: 1,
+          public_gists: 0,
+          followers: 0,
+          following: 0,
+          created_at: "2019-01-28T14:18:14Z",
+          updated_at: "2019-09-04T19:26:18Z"
+        },
+
+        {
+          login: "smccrindle",
+          id: 1187460,
+          node_id: "MDQ6VXNlcjExODc0NjA=",
+          avatar_url: "https://avatars2.githubusercontent.com/u/1187460?v=4",
+          gravatar_id: "",
+          url: "https://api.github.com/users/smccrindle",
+          html_url: "https://github.com/smccrindle",
+          followers_url: "https://api.github.com/users/smccrindle/followers",
+          following_url:
+            "https://api.github.com/users/smccrindle/following{/other_user}",
+          gists_url: "https://api.github.com/users/smccrindle/gists{/gist_id}",
+          starred_url:
+            "https://api.github.com/users/smccrindle/starred{/owner}{/repo}",
+          subscriptions_url:
+            "https://api.github.com/users/smccrindle/subscriptions",
+          organizations_url: "https://api.github.com/users/smccrindle/orgs",
+          repos_url: "https://api.github.com/users/smccrindle/repos",
+          events_url:
+            "https://api.github.com/users/smccrindle/events{/privacy}",
+          received_events_url:
+            "https://api.github.com/users/smccrindle/received_events",
+          type: "User",
+          site_admin: false,
+          name: "Scott McCrindle",
+          company: "Georgian College",
+          blog: "http://georgiancollege.ca/",
+          location: null,
+          email: null,
+          hireable: null,
+          bio: "Program Co-ordinator,\r\nInteractive Media Design–Web",
+          public_repos: 22,
+          public_gists: 0,
+          followers: 4,
+          following: 0,
+          created_at: "2011-11-10T23:48:08Z",
+          updated_at: "2019-03-13T12:13:17Z"
+        },
+
+        {
+          login: "ifotn",
+          id: 6728111,
+          node_id: "MDQ6VXNlcjY3MjgxMTE=",
+          avatar_url: "https://avatars3.githubusercontent.com/u/6728111?v=4",
+          gravatar_id: "",
+          url: "https://api.github.com/users/ifotn",
+          html_url: "https://github.com/ifotn",
+          followers_url: "https://api.github.com/users/ifotn/followers",
+          following_url:
+            "https://api.github.com/users/ifotn/following{/other_user}",
+          gists_url: "https://api.github.com/users/ifotn/gists{/gist_id}",
+          starred_url:
+            "https://api.github.com/users/ifotn/starred{/owner}{/repo}",
+          subscriptions_url: "https://api.github.com/users/ifotn/subscriptions",
+          organizations_url: "https://api.github.com/users/ifotn/orgs",
+          repos_url: "https://api.github.com/users/ifotn/repos",
+          events_url: "https://api.github.com/users/ifotn/events{/privacy}",
+          received_events_url:
+            "https://api.github.com/users/ifotn/received_events",
+          type: "User",
+          site_admin: false,
+          name: null,
+          company: null,
+          blog: "",
+          location: null,
+          email: null,
+          hireable: null,
+          bio: null,
+          public_repos: 228,
+          public_gists: 0,
+          followers: 225,
+          following: 3,
+          created_at: "2014-02-19T15:03:49Z",
+          updated_at: "2019-08-08T12:37:55Z"
+        }
+      ];
+
+      // STEP 3 - Create render function that uses .map method
+      // in order to display data found in 'people' array
+      function render() {
+        const newHTML = people
+          .map(function(person, index) {
+            //callback function
+            return `
+              <article class="dt w-100 bb b--black-05 pb2 mt2" href="#0">
+                <div class="dtc w2 w3-ns v-mid">
+                  <img
+                    src="${person.avatar_url}"
+                    class="ba b--black-10 db br-100 w2 w3-ns h2 h3-ns"
+                  />
+                </div>
+                <div class="dtc v-mid pl3">
+                  <h1 class="f6 f5-ns fw6 lh-title black mv0">${
+                    person.name
+                  }</h1>
+                  <h2 class="f6 fw4 mt0 mb0 black-60">${person.login}</h2>
+                </div>
+                <div class="dtc v-mid">
+                  <form class="w-100 tr">
+                    <button
+                      data-index=${index}
+                      class="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60"
+                      type="submit"
+                    >
+                    ${person.isFollowing == true ? "- Following" : "+ Follow"}
+                    </button>
+                  </form>
+                </div>
+              </article>`;
+          })
+          .join("");
+
+        const main = document.querySelector("main");
+        main.innerHTML = newHTML;
+
+        const buttons = [...document.querySelectorAll("button")];
+        buttons.forEach(btn => btn.addEventListener("click", isFollowing));
+      }
+
+      function isFollowing(e) {
+        e.preventDefault();
+        const index = e.target.dataset.index;
+        if (people[index].isFollowing == true) {
+          people[index].isFollowing = false;
+          console.log(`Unfollowing ${people[index].name}`);
+        } else {
+          people[index].isFollowing = true;
+          console.log(`Following ${people[index].name}`);
+        }
+        // people[index].isFollowing = !people[index].isFollowing;
+        render();
+      }
+
+      // STEP 4 - Upon button click, call function add1More that
+      // takes away one person from the morePeople array
+      // then inserts it into the people array
+      // then render data
+      function add1More(e) {
+        e.preventDefault();
+
+        if (morePeople.length > 0) {
+          audioAdded.currentTime = 0;
+          audioAdded.play();
+        } else {
+          audioDeclined.currentTime = 0;
+          audioDeclined.play();
+        }
+
+        people.push(morePeople.pop());
+        render();
+      }
+
+      // STEP 6 - Finally, upload to a web server, submit in Blackboard
+      btn.addEventListener("click", add1More);
+      render();
+    </script>
+  </body>
+</html>
